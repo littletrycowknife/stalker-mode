@@ -1,0 +1,16 @@
+{
+    "name": "Stalker Mode",
+    "version": "1.0",
+    "manifest_version": 2,
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.facebook.com/*"
+            ],
+            "js": [
+                "jquery-1.9.0.min.js",
+                "content.js"
+            ]
+        }
+    ]
+}
