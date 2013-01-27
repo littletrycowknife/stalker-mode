@@ -2,6 +2,11 @@
     "name": "Stalker Mode",
     "version": "1.0",
     "manifest_version": 2,
+    "icons": {
+        "16": "icon-16.png",
+        "48": "icon-48.png",
+        "128": "icon-128.png"
+    },
     "content_scripts": [
         {
             "matches": [
@@ -12,5 +17,15 @@
                 "content.js"
             ]
         }
-    ]
+    ],
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "page_action": {
+        "default_icon": {
+            "19": "icon-19-off.png",
+            "38": "icon-38-off.png"
+        },
+        "default_title": "Stalker Mode"
+    }
 }
