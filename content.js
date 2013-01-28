@@ -29,6 +29,7 @@ hide = function() {
 	$('.share_action_link:visible').hide();
 	$('.clearfix.snowliftOverlay.snowliftOverlayBar.rightButtons:visible').hide();
 	$('.-cx-PRIVATE-hovercard__Footer.-cx-PRIVATE-uiContextualDialog__footer.clearfix.uiBoxGray.topborder').hide();
+	$('.fbPhotoSubscribeWrapper:visible').hide();
 }
 
 show = function() {
@@ -44,6 +45,7 @@ show = function() {
 	$('.share_action_link:hidden').show();
 	$('.clearfix.snowliftOverlay.snowliftOverlayBar.rightButtons:hidden').show();
 	$('.-cx-PRIVATE-hovercard__Footer.-cx-PRIVATE-uiContextualDialog__footer.clearfix.uiBoxGray.topborder').show();
+	$('.fbPhotoSubscribeWrapper:hidden').show();
 
 }
 
