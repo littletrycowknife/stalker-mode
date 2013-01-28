@@ -1,9 +1,11 @@
 mutationObserver = window.WebKitMutationObserver;
 observerConfig = {attributes: true, childList: true, characterData: true, subtree: true};
-lastHideTime = -999;
-elapsedTime = 300;
 stalkerMode = "off";
 previousUrl = "";
+handlerProgress = null;
+interval = 200;
+intervalStart = (new Date()).getTime();
+handlerDuration = 1500;
 
 getButton = function() {
 	chrome.extension.sendMessage({mode:stalkerMode});
@@ -30,6 +32,10 @@ hide = function() {
 	$('.clearfix.snowliftOverlay.snowliftOverlayBar.rightButtons:visible').hide();
 	$('.-cx-PRIVATE-hovercard__Footer.-cx-PRIVATE-uiContextualDialog__footer.clearfix.uiBoxGray.topborder').hide();
 	$('.fbPhotoSubscribeWrapper:visible').hide();
+	if ((new Date()).getTime() - intervalStart > handlerDuration) {
+		clearInterval(handlerProgress);
+		handlerProgress = null;
+	}
 }
 
 show = function() {
@@ -51,12 +57,9 @@ show = function() {
 
 mutationHandler = function(mutations) {
 		checkUrlChange();
-		if (stalkerMode == "on") {
-			currentTime = (new Date()).getTime();
-			if (currentTime - lastHideTime > elapsedTime ) {
-				hide();
-				lastHideTime = currentTime;
-			}
+		if (stalkerMode == "on" && !handlerProgress) {
+			intervalStart = (new Date()).getTime();
+			handlerProgress = setInterval(hide, interval);
 		}
 	};
 
