@@ -18,6 +18,11 @@ checkUrlChange = function() {
 	}
 }
 
+stopHandler = function() {
+	clearInterval(handlerProgress);
+	handlerProgress = null;
+}
+
 hide = function() {
 	$('.UFICommentActions.fsm.fwn.fcg:visible').hide();
 	$('.FriendButton:visible').hide();
@@ -33,8 +38,7 @@ hide = function() {
 	$('.-cx-PRIVATE-hovercard__Footer.-cx-PRIVATE-uiContextualDialog__footer.clearfix.uiBoxGray.topborder').hide();
 	$('.fbPhotoSubscribeWrapper:visible').hide();
 	if ((new Date()).getTime() - intervalStart > handlerDuration) {
-		clearInterval(handlerProgress);
-		handlerProgress = null;
+		stopHandler();
 	}
 }
 
@@ -70,8 +74,11 @@ chrome.extension.onMessage.addListener(
 	function(request, sender, sendResponse) {
 		stalkerMode = ((stalkerMode=="on")?"off":"on");
 		if (stalkerMode == "on") {
-			mutationHandler();
+			hide();
 		} else {
+			if (handlerProgress) {
+				stopHandler();
+			}
 			show();
 		}
 		sendResponse({mode:stalkerMode});
